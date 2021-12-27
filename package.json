@@ -1,0 +1,46 @@
+{
+	"name": "@erwinstone/bs-toast",
+	"version": "1.0.0",
+	"description": "Bootstrap toasts generator",
+	"main": "dist/bs-toast.js",
+	"types": "dist/bs-toast.d.ts",
+	"module": "dist/bs-toast.module.js",
+	"source": "src/bs-toast.ts",
+	"repository": "https://github.com/erwinstone/bs-toast.git",
+	"license": "MIT",
+	"author": "erwinstone",
+	"keywords": [
+		"bootstrap toast",
+		"toast",
+		"bootstrap toast generator",
+		"bootstrap5"
+	],
+	"bugs": {
+		"url": "https://github.com/erwinstone/bs-toast/issues"
+	},
+	"homepage": "https://bs-toast.vercel.app/",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		"default": "./dist/bs-toast.js",
+		"import": "./dist/bs-toast.module.js",
+		"require": "./dist/bs-toast.js"
+	},
+	"scripts": {
+		"build": "run-s build-*",
+		"build-js": "rollup -c",
+		"build-dts": "tsc src/bs-toast.ts -d --emitDeclarationOnly --esModuleInterop --downlevelIteration --target esnext --outDir dist",
+		"build-dts-module": "shx cp dist/bs-toast.d.ts dist/bs-toast.module.d.ts",
+		"dev": "run-p dev-*",
+		"dev-js": "rollup -c -w"
+	},
+	"devDependencies": {
+		"esbuild": "0.14.8",
+		"npm-run-all": "4.1.5",
+		"rollup": "2.62.0",
+		"rollup-plugin-esbuild": "4.8.1",
+		"shx": "0.3.3",
+		"typescript": "4.5.4"
+	}
+}
