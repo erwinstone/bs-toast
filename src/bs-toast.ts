@@ -1,21 +1,21 @@
 class BsToast {
-	private body: Options['body']
-	private animation: Options['animation']
-	private autohide: Options['autohide']
-	private btnClose: Options['btnClose']
-	private btnCloseWhite: Options['btnCloseWhite']
-	private className: Options['className']
-	private delay: Options['delay']
-	private gap: Options['gap']
-	private header: Options['header']
-	private margin: Options['margin']
-	private placement: Options['placement']
+	#body: Options['body']
+	#animation: Options['animation']
+	#autohide: Options['autohide']
+	#btnClose: Options['btnClose']
+	#btnCloseWhite: Options['btnCloseWhite']
+	#className: Options['className']
+	#delay: Options['delay']
+	#gap: Options['gap']
+	#header: Options['header']
+	#margin: Options['margin']
+	#placement: Options['placement']
 
-	private classBtnClose = 'btn-close'
-	private classToastHeader = 'toast-header'
-	private attributeHidden = 'hidden'
+	#classBtnClose = 'btn-close'
+	#classToastHeader = 'toast-header'
+	#attributeHidden = 'hidden'
 
-	private pos: string[]
+	#pos: string[]
 	toast: HTMLDivElement
 	bootstrapToast: {
 		show(): void
@@ -23,41 +23,41 @@ class BsToast {
 	}
 
 	constructor(options: Options) {
-		this.body = this.setOption(options.body, '')
-		this.animation = this.setOption(options.animation, true)
-		this.autohide = this.setOption(options.autohide, true)
-		this.btnClose = this.setOption(options.btnClose, true)
-		this.btnCloseWhite = this.setOption(options.btnCloseWhite, false)
-		this.className = this.setOption(options.className, '')
-		this.delay = this.setOption(options.delay, 5000)
-		this.gap = this.setOption(options.gap, 16)
-		this.header = this.setOption(options.header, '')
-		this.margin = this.setOption(options.margin, '1rem')
-		this.placement = this.setOption(options.placement, 'top-right')
-		this.pos = this.placement.split('-')
+		this.#body = this.#setOption(options.body, '')
+		this.#animation = this.#setOption(options.animation, true)
+		this.#autohide = this.#setOption(options.autohide, true)
+		this.#btnClose = this.#setOption(options.btnClose, true)
+		this.#btnCloseWhite = this.#setOption(options.btnCloseWhite, false)
+		this.#className = this.#setOption(options.className, '')
+		this.#delay = this.#setOption(options.delay, 5000)
+		this.#gap = this.#setOption(options.gap, 16)
+		this.#header = this.#setOption(options.header, '')
+		this.#margin = this.#setOption(options.margin, '1rem')
+		this.#placement = this.#setOption(options.placement, 'top-right')
+		this.#pos = this.#placement.split('-')
 
-		this.create()
-		this.events()
+		this.#create()
+		this.#events()
 	}
 
-	private create() {
-		const closeBtn = `<button type="button" class="${this.classBtnClose} flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" ${this.attributeHidden}></button>`
-		const style = `style="margin:${this.margin};${this.pos[0]}:0;${this.pos[1]}:${this.animation ? '-50%' : 0};z-index:1081"`
+	#create() {
+		const closeBtn = `<button type="button" class="${this.#classBtnClose} flex-shrink-0" data-bs-dismiss="toast" aria-label="Close" ${this.#attributeHidden}></button>`
+		const style = `style="margin:${this.#margin};${this.#pos[0]}:0;${this.#pos[1]}:${this.#animation ? '-50%' : 0};z-index:1081"`
 		const template = document.createElement('template')
-		template.innerHTML = `<div class="toast position-fixed toast-${this.placement} ${this.className}" ${style} role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="${this.classToastHeader}" ${this.attributeHidden}><div class="d-flex align-items-center flex-grow-1">${this.header}</div>${closeBtn}</div>
-				<div class="toast-body"><div class="d-flex w-100"><div class="flex-grow-1">${this.body}</div>${closeBtn}</div></div>
+		template.innerHTML = `<div class="toast position-fixed toast-${this.#placement} ${this.#className}" ${style} role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="${this.#classToastHeader}" ${this.#attributeHidden}><div class="d-flex align-items-center flex-grow-1">${this.#header}</div>${closeBtn}</div>
+				<div class="toast-body"><div class="d-flex w-100"><div class="flex-grow-1">${this.#body}</div>${closeBtn}</div></div>
 			</div>`
 		const toast = template.content.firstChild
 
 		if (toast instanceof HTMLDivElement) {
-			const closeButtons = toast.querySelectorAll(`.${this.classBtnClose}`)
+			const closeButtons = toast.querySelectorAll(`.${this.#classBtnClose}`)
 			closeButtons.forEach((btn) => {
-				this.btnClose && btn.removeAttribute(this.attributeHidden) // show btn-close
-				this.btnCloseWhite && btn.classList.add('btn-close-white') // add btn-close-white
+				this.#btnClose && btn.removeAttribute(this.#attributeHidden) // show btn-close
+				this.#btnCloseWhite && btn.classList.add('btn-close-white') // add btn-close-white
 			})
-			if (this.header !== '') {
-				toast.querySelector(`.${this.classToastHeader}`).removeAttribute(this.attributeHidden) // show header
+			if (this.#header !== '') {
+				toast.querySelector(`.${this.#classToastHeader}`).removeAttribute(this.#attributeHidden) // show header
 				closeButtons[1].remove() // remove btn-close from toast-body
 			}
 			this.toast = toast
@@ -68,16 +68,16 @@ class BsToast {
 
 		// @ts-ignore
 		this.bootstrapToast = new bootstrap.Toast(this.toast, {
-			animation : this.animation,
-			autohide : this.autohide,
-			delay : this.delay,
+			animation : this.#animation,
+			autohide : this.#autohide,
+			delay : this.#delay,
 		})
 	}
 
-	private events() {
+	#events() {
 		this.toast.addEventListener('hidden.bs.toast', () => {
 			this.toast.remove()
-			this.stack()
+			this.#stack()
 		})
 
 		this.toast.addEventListener('show.bs.toast', () => {
@@ -87,19 +87,19 @@ class BsToast {
 				if (that.toast.offsetHeight > 0) { // make sure dom appear
 					clearInterval(timer)
 
-					if (that.animation) {
+					if (that.#animation) {
 						const transition = parseFloat(getComputedStyle(that.toast).transitionDuration) * 1000
 						that.toast.style.transition = `all ${transition * 4}ms cubic-bezier(0.16, 1, 0.3, 1), opacity ${transition}ms linear`
-						that.toast.style[that.pos[1]] = 0 // slide in
+						that.toast.style[that.#pos[1]] = 0 // slide in
 					}
-					that.stack()
+					that.#stack()
 				}
 			}
 		})
 	}
 
-	private stack() {
-		const toasts = document.body.querySelectorAll(`.toast-${this.placement}`)
+	#stack() {
+		const toasts = document.body.querySelectorAll(`.toast-${this.#placement}`)
 
 		let yAxis = []
 		toasts.forEach((el, index) => {
@@ -108,12 +108,12 @@ class BsToast {
 				if (toasts[index + 1] instanceof HTMLElement) {
 					yAxis.push(yAxis[index] + el.offsetHeight) // next toast position = current element position + current element height
 				}
-				el.style[this.pos[0]] = yAxis[index] + (this.gap * index) + 'px'
+				el.style[this.#pos[0]] = yAxis[index] + (this.#gap * index) + 'px'
 			}
 		})
 	}
 
-	private setOption(param: any, defaultValue: any) {
+	#setOption(param: any, defaultValue: any) {
 		return param !== undefined ? param : defaultValue
 	}
 
