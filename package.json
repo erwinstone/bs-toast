@@ -1,6 +1,6 @@
 {
 	"name": "@erwinstone/bs-toast",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Bootstrap toasts generator",
 	"main": "dist/bs-toast.js",
 	"types": "dist/bs-toast.d.ts",
@@ -36,10 +36,10 @@
 		"dev-js": "rollup -c -w"
 	},
 	"devDependencies": {
-		"esbuild": "0.14.8",
+		"esbuild": "0.14.9",
 		"npm-run-all": "4.1.5",
 		"rollup": "2.62.0",
-		"rollup-plugin-esbuild": "4.8.1",
+		"rollup-plugin-esbuild": "4.8.2",
 		"shx": "0.3.3",
 		"typescript": "4.5.4"
 	}
